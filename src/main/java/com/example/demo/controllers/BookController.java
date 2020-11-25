@@ -14,6 +14,11 @@ public class BookController {
     @Autowired
     private BookRepository BookRepository;
 
+    @GetMapping("/")
+    public String home(){
+        return "Spring server, go to /books";
+    }
+
     @CrossOrigin
     @GetMapping("/books")
     public List<Book> getAllBooks() {
@@ -26,8 +31,11 @@ public class BookController {
         }
         return books;
     }
-    @GetMapping("/")
-    public String home(){
-        return "Spring server, go to /books";
+
+    @CrossOrigin
+    @PostMapping("/books")
+    public Book create(@RequestBody Book book){
+        return BookRepository.save(book);
     }
+
 }

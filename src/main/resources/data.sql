@@ -1,15 +1,15 @@
 insert into book
-values('MaddAddam');
+values(nextval('BOOK_SEQ'),'Suzanne','MaddAddam');
 
 insert into book
-values('The year of the flood');
+values(nextval('BOOK_SEQ'),'Jos','The year of the flood');
 
 insert into book
-values('Oryx and Crake');
+values(nextval('BOOK_SEQ'),'Johannes','Oryx and Crake');
 
 insert into book
-values('Lord Of The Rings');
+values(nextval('BOOK_SEQ'),'Maria','Lord Of The Rings');
 
 insert into book
-values('Geronimo Stilton');
+values(nextval('BOOK_SEQ'),'Herman Brusselmans','Geronimo Stilton');
 
