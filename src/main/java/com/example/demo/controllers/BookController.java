@@ -35,7 +35,15 @@ public class BookController {
     @CrossOrigin
     @PostMapping("/books")
     public Book create(@RequestBody Book book){
+
         return BookRepository.save(book);
     }
+
+    @CrossOrigin
+    @DeleteMapping("/books")
+    public void delete(@RequestBody Book book) {
+        BookRepository.delete(book);
+    }
+
 
 }
