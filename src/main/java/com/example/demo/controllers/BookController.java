@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import static java.lang.Thread.sleep;
 
 @RestController
@@ -40,9 +42,20 @@ public class BookController {
     }
 
     @CrossOrigin
-    @DeleteMapping("/books")
-    public void delete(@RequestBody Book book) {
-        BookRepository.delete(book);
+    @PutMapping("/books/{id}")
+    public Book edit(@PathVariable int id, @RequestBody Book book) {
+        if (book.getId()!=id) return null;
+        Optional<Book> bookFromDb = BookRepository.findById(id);
+        if (bookFromDb.isPresent()) {
+            return BookRepository.save(book);
+        }
+        return null;
+    }
+
+    @CrossOrigin
+    @DeleteMapping("/books/{id}")
+    public void delete(@PathVariable int id) {
+        BookRepository.deleteById(id);
     }
 
 
