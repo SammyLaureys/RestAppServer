@@ -64,8 +64,15 @@ public class BookController {
 
     @CrossOrigin
     @DeleteMapping("/books/{id}")
-    public void delete(@PathVariable int id) {
-        BookRepository.deleteById(id);
+    public void delete(@PathVariable int id, @RequestBody Book book) {
+        Optional<Book> bookFromDb = BookRepository.findById(id);
+        if(bookFromDb.isPresent()){
+            BookRepository.deleteById(id);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    String.format("No book with id %s", book.getId()));
+        }
     }
 
 
