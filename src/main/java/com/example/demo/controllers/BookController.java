@@ -51,10 +51,13 @@ public class BookController {
     @CrossOrigin
     @PutMapping("/books/{id}")
     public Book edit(@PathVariable int id, @RequestBody Book book) {
-        if (book.getId()!=id) return null;
         Optional<Book> bookFromDb = BookRepository.findById(id);
         if (bookFromDb.isPresent()) {
             return BookRepository.save(book);
+        }
+        if (book.getId()!=id){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
+                    String.format("No book with id %s", book.getId()));
         }
         return null;
     }
