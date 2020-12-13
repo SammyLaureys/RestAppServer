@@ -23,3 +23,18 @@ insert into BOOK
 values
 (nextval('BOOK_SEQ'), 'De opwindvogelkronieken', 'Haruki Murakami');
 
+
+insert into GENRE
+(ID, NAME)
+values
+(nextval('GENRE_SEQ'), 'Comedy');
+
+insert into GENRE
+(ID, NAME)
+values
+(nextval('GENRE_SEQ'), 'Action');
+
+insert into GENRE
+(ID, NAME)
+values
+(nextval('GENRE_SEQ'), 'Thriller');

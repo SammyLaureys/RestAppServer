@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -35,7 +36,7 @@ public class BookController {
 
     @CrossOrigin
     @PostMapping("/books")
-    public Book create(@RequestBody Book book) {
+    public Book create(@Valid @RequestBody Book book) {
         logger.info("##### create");
         if (bookRepository.findByTitle(book.getTitle()).isPresent())
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,
@@ -45,7 +46,7 @@ public class BookController {
 
     @CrossOrigin
     @PutMapping("/books/{id}")
-    public Book edit(@PathVariable int id, @RequestBody Book book) {
+    public Book edit(@Valid @PathVariable int id, @RequestBody Book book) {
         logger.info("##### edit");
         if (book.getId() != id) return null;
         Optional<Book> bookFromDb = bookRepository.findById(id);
