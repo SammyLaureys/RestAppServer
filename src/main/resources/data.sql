@@ -1,15 +1,25 @@
-insert into book
-values(nextval('BOOK_SEQ'),'Suzanne','MaddAddam');
+insert into BOOK
+(ID, TITLE, AUTHOR)
+values
+(nextval('BOOK_SEQ'), 'Oryx and Crake', 'Margaret Atwood');
 
-insert into book
-values(nextval('BOOK_SEQ'),'Jos','The year of the flood');
+insert into BOOK
+(ID, TITLE, AUTHOR)
+values
+(nextval('BOOK_SEQ'), 'The year of the flood', 'Margaret Atwood');
 
-insert into book
-values(nextval('BOOK_SEQ'),'Johannes','Oryx and Crake');
+insert into BOOK
+(ID, TITLE, AUTHOR)
+values
+(nextval('BOOK_SEQ'), 'MaddAddam', 'Margaret Atwood');
 
-insert into book
-values(nextval('BOOK_SEQ'),'Maria','Lord Of The Rings');
+insert into BOOK
+(ID, TITLE, AUTHOR)
+values
+(nextval('BOOK_SEQ'), '1Q84', 'Haruki Murakami');
 
-insert into book
-values(nextval('BOOK_SEQ'),'Herman Brusselmans','Geronimo Stilton');
+insert into BOOK
+(ID, TITLE, AUTHOR)
+values
+(nextval('BOOK_SEQ'), 'De opwindvogelkronieken', 'Haruki Murakami');
 
