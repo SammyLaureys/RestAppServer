@@ -1,44 +1,29 @@
 package be.thomasmore.bookserver.model;
+
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
+@Data
 @Entity
 public class Book {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_generator")
     @SequenceGenerator(name = "book_generator", sequenceName = "book_seq", allocationSize = 1)
     @Id
     int id;
-    @NotBlank(message = "title shouldn't be blank") @NotNull
+    @NotBlank(message="Book Title should not be blank") @NotNull
     String title;
-    @NotBlank(message = "author shouldn't be blank") @NotNull
+    @NotBlank(message="Book Author should not be blank") @NotNull
     String author; //this is not normalized but I don't care for this example
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+    @Min(value=0, message="price should not be smaller than 0")
+    @Max(value=200, message="price should not be greater than 200")
+    Integer priceInEur;
 }
 

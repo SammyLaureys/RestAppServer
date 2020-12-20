@@ -27,14 +27,14 @@ values
 insert into GENRE
 (ID, NAME)
 values
-(nextval('GENRE_SEQ'), 'Comedy');
+(nextval('GENRE_SEQ'), 'fantasy');
 
 insert into GENRE
 (ID, NAME)
 values
-(nextval('GENRE_SEQ'), 'Action');
+(nextval('GENRE_SEQ'), 'non-fiction');
 
 insert into GENRE
 (ID, NAME)
 values
-(nextval('GENRE_SEQ'), 'Thriller');
+(nextval('GENRE_SEQ'), 'programming');

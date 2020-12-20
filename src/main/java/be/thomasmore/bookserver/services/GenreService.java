@@ -7,3 +7,4 @@ import org.springframework.stereotype.Service;
 public interface GenreService {
     Iterable<Genre> findAll();
 }
+

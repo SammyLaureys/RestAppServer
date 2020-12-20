@@ -1,31 +1,21 @@
 package be.thomasmore.bookserver.model;
+
+
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
+@Data
 @Entity
 public class Genre {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "genre_generator")
     @SequenceGenerator(name = "genre_generator", sequenceName = "genre_seq", allocationSize = 1)
     @Id
     int id;
+    @NotBlank(message="Genre name should not be blank") @NotNull
     String name;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
-
