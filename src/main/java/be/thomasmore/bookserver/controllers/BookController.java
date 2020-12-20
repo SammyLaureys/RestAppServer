@@ -3,6 +3,8 @@ package be.thomasmore.bookserver.controllers;
 import be.thomasmore.bookserver.model.Book;
 import be.thomasmore.bookserver.repositories.BookRepository;
 import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +23,7 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
-    @CrossOrigin
+
     @ApiOperation(value = "find all the books that are stored in the database - " +
             "or if Request Parameter titleKeyWord is given all books where the title contains this titleKeyWord (ignore-case)")
     @GetMapping("/books")
@@ -33,8 +36,18 @@ public class BookController {
             return bookRepository.findByTitleContainingIgnoreCase(titleKeyWord);
     }
 
+    @GetMapping("/authenticate")
+    public AuthenticationBean authenticate(Principal principal){
+        log.info("##### authenticate");
+        return new AuthenticationBean(principal.getName());
+    }
 
-    @CrossOrigin
+    @Data
+    @AllArgsConstructor
+    class AuthenticationBean {
+        private String username;
+    }
+
     @PostMapping("/books")
     public Book create(@Valid @RequestBody Book book) {
         log.info("##### create");
@@ -44,7 +57,7 @@ public class BookController {
         return bookRepository.save(book);
     }
 
-    @CrossOrigin
+
     @PutMapping("/books/{id}")
     public Book edit(@PathVariable int id, @RequestBody Book book) {
         log.info("##### edit");
@@ -57,7 +70,7 @@ public class BookController {
         return bookRepository.save(book);
     }
 
-    @CrossOrigin
+
     @DeleteMapping("/books/{id}")
     public void delete(@PathVariable int id) {
         log.info("##### delete");
