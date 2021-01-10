@@ -3,18 +3,13 @@ package be.thomasmore.bookserver.controllers;
 import be.thomasmore.bookserver.model.Book;
 import be.thomasmore.bookserver.repositories.BookRepository;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.security.Principal;
 import java.util.Optional;
 
 @RestController
@@ -22,7 +17,6 @@ import java.util.Optional;
 public class BookController {
     @Autowired
     private BookRepository bookRepository;
-
 
     @ApiOperation(value = "find all the books that are stored in the database - " +
             "or if Request Parameter titleKeyWord is given all books where the title contains this titleKeyWord (ignore-case)")
@@ -36,17 +30,6 @@ public class BookController {
             return bookRepository.findByTitleContainingIgnoreCase(titleKeyWord);
     }
 
-    @GetMapping("/authenticate")
-    public AuthenticationBean authenticate(Principal principal){
-        log.info("##### authenticate");
-        return new AuthenticationBean(principal.getName());
-    }
-
-    @Data
-    @AllArgsConstructor
-    class AuthenticationBean {
-        private String username;
-    }
 
     @PostMapping("/books")
     public Book create(@Valid @RequestBody Book book) {
@@ -56,7 +39,6 @@ public class BookController {
                     String.format("Book with title %s already exists.", book.getTitle()));
         return bookRepository.save(book);
     }
-
 
     @PutMapping("/books/{id}")
     public Book edit(@PathVariable int id, @RequestBody Book book) {
@@ -69,7 +51,6 @@ public class BookController {
 
         return bookRepository.save(book);
     }
-
 
     @DeleteMapping("/books/{id}")
     public void delete(@PathVariable int id) {
